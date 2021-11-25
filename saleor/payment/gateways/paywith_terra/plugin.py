@@ -1,22 +1,23 @@
-import logging
-from decimal import Decimal
-
 from saleor.payment.gateways.utils import require_active_plugin
-from saleor.payment.interface import GatewayConfig, GatewayResponse
+from saleor.payment.interface import GatewayConfig, GatewayResponse, PaymentData, \
+    TokenConfig
 from saleor.plugins.base_plugin import BasePlugin, ConfigurationTypeField
 
-GATEWAY_NAME = "Paywith Terra"
+from . import get_client_token, process_payment, authorize, capture, void, \
+    refund, confirm
 
-logger = logging.getLogger(__name__);
+GATEWAY_NAME = "Paywith Terra"
 
 
 class PaywithTerraGatewayPlugin(BasePlugin):
     PLUGIN_NAME = GATEWAY_NAME
-    PLUGIN_ID = "pf1gura.payments.paywith_terra"
+    PLUGIN_ID = "luart.payments.paywith_terra"
 
     DEFAULT_CONFIGURATION = [
         {"name": "API Key (token)", "value": None},
         {"name": "Terra address", "value": None},
+        {"name": "Webhook URL", "value": None},
+        {"name": "Redirect URL", "value": None},
     ]
 
     CONFIG_STRUCTURE = {
@@ -30,6 +31,17 @@ class PaywithTerraGatewayPlugin(BasePlugin):
             "help_text": "Your shop wallet address on the Terra blockchain to "
                          "receiving payments.",
             "label": "Terra address",
+        },
+        "Webhook URL": {
+            "type": ConfigurationTypeField.STRING,
+            "help_text": "URL that should be used when coming back from payment page.",
+            "label": "Webhook URL",
+        },
+        "Redirect URL": {
+            "type": ConfigurationTypeField.STRING,
+            "help_text": "URL that should be used by payment provider "
+                         "to inform that payment was successful.",
+            "label": "Redirect URL",
         },
     }
 
@@ -48,7 +60,43 @@ class PaywithTerraGatewayPlugin(BasePlugin):
     def _get_gateway_config(self):
         return self.config
 
-    # See if needed
+    @require_active_plugin
+    def authorize_payment(
+            self, payment_information: "PaymentData", previous_value
+    ) -> "GatewayResponse":
+        return authorize(payment_information, self._get_gateway_config())
+
+    @require_active_plugin
+    def capture_payment(
+            self, payment_information: "PaymentData", previous_value
+    ) -> "GatewayResponse":
+        return capture(payment_information, self._get_gateway_config())
+
+    @require_active_plugin
+    def confirm_payment(
+            self, payment_information: "PaymentData", previous_value
+    ) -> "GatewayResponse":
+        return confirm(payment_information, self._get_gateway_config())
+
+    @require_active_plugin
+    def refund_payment(
+            self, payment_information: "PaymentData", previous_value
+    ) -> "GatewayResponse":
+        return refund(payment_information, self._get_gateway_config())
+
+    @require_active_plugin
+    def void_payment(
+            self, payment_information: "PaymentData", previous_value
+    ) -> "GatewayResponse":
+        return void(payment_information, self._get_gateway_config())
+
+    @require_active_plugin
+    def process_payment(
+            self, payment_information: PaymentData, previous_value
+    ) -> GatewayResponse:
+        return process_payment(payment_information, self._get_gateway_config())
+
+    @require_active_plugin
     def get_supported_currencies(self, previous_value):
         return [c.strip() for c in self.config.supported_currencies.split(",")]
 
@@ -57,13 +105,9 @@ class PaywithTerraGatewayPlugin(BasePlugin):
         return []
 
     @require_active_plugin
-    def process_payment(self) -> GatewayResponse:
-        return GatewayResponse(
-            is_success=True,
-            transaction_id="TestID",
-            currency=self.config.supported_currencies,
-            amount=Decimal("0.01"),
-            kind="INITIATED",
-            error=None,
-            action_required=False,
-        )
+    def get_client_token(self, token_config: TokenConfig, previous_value):
+        return get_client_token()
+
+    @require_active_plugin
+    def token_is_required_as_payment_input(self, previous_value):
+        return False
