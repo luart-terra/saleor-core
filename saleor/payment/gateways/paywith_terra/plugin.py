@@ -51,7 +51,7 @@ class PaywithTerraGatewayPlugin(BasePlugin):
 
         self.config = GatewayConfig(
             gateway_name=GATEWAY_NAME,
-            supported_currencies="UST",
+            supported_currencies="USD",
             store_customer=True,
             auto_capture=True,
             connection_params=configuration
