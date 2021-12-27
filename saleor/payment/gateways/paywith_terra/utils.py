@@ -6,7 +6,7 @@ def currency_to_denom(currency: string) -> string:
     lowercase_currency = currency.lower()
 
     currency_map = {
-        "ust": "uusd"
+        "usd": "uusd"
     }
 
     return currency_map[lowercase_currency]
