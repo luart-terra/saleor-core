@@ -888,7 +888,7 @@ typing-extensions = {version = ">=3.7.4.3", markers = "python_version < \"3.10\"
 
 [[package]]
 name = "google-api-core"
-version = "2.3.2"
+version = "2.4.0"
 description = "Google API client core library"
 category = "main"
 optional = false
@@ -2491,7 +2491,7 @@ python-versions = "*"
 
 [[package]]
 name = "types-python-dateutil"
-version = "2.8.4"
+version = "2.8.7"
 description = "Typing stubs for python-dateutil"
 category = "dev"
 optional = false
@@ -2726,7 +2726,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.9"
-content-hash = "50c346d026087223bd0b8f03d7f138d6b9d166f83f2a129c6b66c813061f23c4"
+content-hash = "62c7df1820837c979a1cabce8ea26c041d517e51dbd51582c7a41f07ad6071e6"
 
 [metadata.files]
 adyen = [
@@ -3174,8 +3174,8 @@ gitpython = [
     {file = "GitPython-3.1.24.tar.gz", hash = "sha256:df83fdf5e684fef7c6ee2c02fc68a5ceb7e7e759d08b694088d0cacb4eba59e5"},
 ]
 google-api-core = [
-    {file = "google-api-core-2.3.2.tar.gz", hash = "sha256:c8889f45cf58deca522888ae1d39b2a25e93e7d1b019ae8cee6456d5c726a40c"},
-    {file = "google_api_core-2.3.2-py2.py3-none-any.whl", hash = "sha256:3c562d393aed7e3d2011fcd1f103b490c411dcf5644b6312ca11a166a6ea8faf"},
+    {file = "google-api-core-2.4.0.tar.gz", hash = "sha256:ba8787b7c61632cd0340f095e1c036bef9426b2594f10afb290ba311ae8cb2cb"},
+    {file = "google_api_core-2.4.0-py2.py3-none-any.whl", hash = "sha256:58e2c1171a3d51778bf4e428fbb4bf79cbd05007b4b44deaa80cf73c80eebc0f"},
 ]
 google-auth = [
     {file = "google-auth-2.3.3.tar.gz", hash = "sha256:d83570a664c10b97a1dc6f8df87e5fdfff012f48f62be131e449c20dfc32630e"},
@@ -4223,8 +4223,8 @@ types-pkg-resources = [
     {file = "types_pkg_resources-0.1.3-py2.py3-none-any.whl", hash = "sha256:0cb9972cee992249f93fff1a491bf2dc3ce674e5a1926e27d4f0866f7d9b6d9c"},
 ]
 types-python-dateutil = [
-    {file = "types-python-dateutil-2.8.4.tar.gz", hash = "sha256:29b85e25b832170f8d5ed383bf68cf5d9ee9066e2354221c6e9dd381dab71c5c"},
-    {file = "types_python_dateutil-2.8.4-py3-none-any.whl", hash = "sha256:82a6160961d7b24418eeb383a5356f262229bd1450e0ccd82ad40f8a67baaafd"},
+    {file = "types-python-dateutil-2.8.7.tar.gz", hash = "sha256:f34bae3c8e83c67f7cbf407fc9d6ee889d7708b42270a496b6026a5537e80482"},
+    {file = "types_python_dateutil-2.8.7-py3-none-any.whl", hash = "sha256:0e3b96fc79d3e58e011a9446ec85be080e2d2a8840dfe124ce30f4e53dbca9e5"},
 ]
 types-pytz = [
     {file = "types-pytz-2021.3.3.tar.gz", hash = "sha256:f6d21d6687935a1615db464b1e1df800d19502c36bc0486f43be7dfd2c404947"},
